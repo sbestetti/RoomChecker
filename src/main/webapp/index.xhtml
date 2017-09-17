@@ -4,12 +4,53 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	$(document).ready(function() {
+		  $(".datepicker").datepicker({
+		    dateFormat: "yy-mm-dd",
+			showOn: "button",
+		    buttonImage: "images/calendar.gif",
+		    buttonImageOnly: true})
+		});
+	</script>
 	<title>Room Checker</title>
+	
 </h:head>
 <h:body>
 	<h1>Room Checker 1.0.0-Snapshot</h1>
 	<h:form>
-		<h:commandButton value="Test button" action="#{testBean.runTest}"/>
+		<h:outputLabel value="Pick your room" />
+		<h:selectOneListbox value="#{indexBean.roomToCheck}" required="true">
+			<f:selectItem itemValue="brittas" itemLabel="Brittas Bay" />
+			<f:selectItem itemValue="bull" itemLabel="Bull Island" />
+			<f:selectItem itemValue="cape" itemLabel="Cape Clear" />
+			<f:selectItem itemValue="carl" itemLabel="Carlingford" />
+			<f:selectItem itemValue="conn" itemLabel="Connemara" />
+			<f:selectItem itemValue="dingle" itemLabel="Dingle" />
+			<f:selectItem itemValue="doolin" itemLabel="Doolin" />
+			<f:selectItem itemValue="glen" itemLabel="Glendalough" />
+			<f:selectItem itemValue="kill" itemLabel="Killiney Hill" />
+			<f:selectItem itemValue="lach" itemLabel="Lachinch" />
+			<f:selectItem itemValue="new" itemLabel="Newgrange" />
+			<f:selectItem itemValue="liber" itemLabel="The Liberties" />
+			<f:selectItem itemValue="tramore" itemLabel="Tramore" />
+			<f:selectItem itemValue="after" itemLabel="WEX - After thoughts" />
+			<f:selectItem itemValue="bdeal" itemLabel="WEX - Big Deal" />
+			<f:selectItem itemValue="bideas" itemLabel="WEX - Big Ideas" />
+			<f:selectItem itemValue="camper" itemLabel="WEX - Camper Van" />
+			<f:selectItem itemValue="cow" itemLabel="WEX - Cow Shed" />
+			<f:selectItem itemValue="disco" itemLabel="WEX - Disco Cave" />
+			<f:selectItem itemValue="little" itemLabel="WEX - Little Deal" />
+			<f:selectItem itemValue="ndeal" itemLabel="WEX - No Deal" />
+		</h:selectOneListbox>
+		<br></br>
+		<h:outputLabel value="Date (yyyy-mm-dd)" />
+		<h:inputText styleClass="datepicker" value="#{indexBean.dateToCheck}"></h:inputText>
+		<br></br>
+		<h:commandButton value="Check" action="#{indexBean.check}" />
 	</h:form>
+	<h:messages />
 </h:body>
 </html>
