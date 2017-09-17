@@ -7,9 +7,6 @@ import javax.inject.Named;
 @Named
 public class EventsBean{
 	
-	//TODO Test if this bean also need to be serializable
-	
-	
 	@Inject
 	IndexBean indexBean;
 	
