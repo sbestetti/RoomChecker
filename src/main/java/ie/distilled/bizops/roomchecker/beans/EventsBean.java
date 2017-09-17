@@ -1,22 +1,25 @@
 package ie.distilled.bizops.roomchecker.beans;
 
-import java.io.Serializable;
-
-import javax.enterprise.context.SessionScoped;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-@SessionScoped
-public class IndexBean implements Serializable{
+public class EventsBean{
 	
-	private static final long serialVersionUID = 3185526729050141711L;
+	//TODO Test if this bean also need to be serializable
+	
+	
+	@Inject
+	IndexBean indexBean;
 	
 	private String roomToCheck = new String();
-	private String dateToCheck = new String();	
+	private String dateToCheck = new String();
 	
-	//Methods
-	public String check() {
-		return "events?faces-redirect=true";
+	@PostConstruct
+	private void getDataFromIndexBean() {
+		this.roomToCheck = indexBean.getRoomToCheck();
+		this.dateToCheck = indexBean.getDateToCheck();
 	}
 
 	//Getters & Setters
@@ -36,6 +39,4 @@ public class IndexBean implements Serializable{
 		this.dateToCheck = dateToCheck;
 	}	
 
-	
-	
 }
