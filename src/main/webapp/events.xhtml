@@ -7,12 +7,17 @@
 	<title>Room Checker</title>
 </h:head>
 <h:body>
-	<h1>Room Checker 1.0.0-Snapshot - Reponse</h1>
+	<h1>Room Checker 1.0.0-Snapshot - Response</h1>
 	<h:form>
-		Room to check: <h:outputText value="#{eventsBean.roomToCheck}"/>
-		Date to check: <h:outputText value="#{eventsBean.dateToCheck}"/>
+		<h:dataTable value="#{eventsBean.events}" var="event">
+			<h:column>
+				From <h:outputText value="#{event.organizer}" /> 
+				at <h:outputLabel value="#{event.start}"/>				
+			</h:column>
+		</h:dataTable>
 		<br />
-		<h:commandLink value="Check other room/date" action="index?faces-redirect=true"/>	
+		<h:commandLink value="Check other room/date"
+			action="index?faces-redirect=true" />
 	</h:form>
 </h:body>
 </html>

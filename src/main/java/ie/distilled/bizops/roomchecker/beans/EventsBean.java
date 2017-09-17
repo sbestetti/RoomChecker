@@ -1,39 +1,42 @@
 package ie.distilled.bizops.roomchecker.beans;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import com.google.api.services.calendar.model.Event;
+
+import ie.distilled.bizops.roomchecker.tools.GoogleAPI;
 
 @Named
 public class EventsBean{
 	
 	@Inject
-	IndexBean indexBean;
+	IndexBean indexBean;	
 	
-	private String roomToCheck = new String();
-	private String dateToCheck = new String();
+	private List<Event> events = new ArrayList<>();
 	
 	@PostConstruct
 	private void getDataFromIndexBean() {
-		this.roomToCheck = indexBean.getRoomToCheck();
-		this.dateToCheck = indexBean.getDateToCheck();
+		try {
+			setEvents(GoogleAPI.getItems(indexBean.getRoomToCheck(), indexBean.getDateToCheck()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 
 	//Getters & Setters
-	public String getRoomToCheck() {
-		return roomToCheck;
+	public List<Event> getEvents() {
+		return events;
 	}
 
-	public void setRoomToCheck(String roomToCheck) {
-		this.roomToCheck = roomToCheck;
-	}
-
-	public String getDateToCheck() {
-		return dateToCheck;
-	}
-
-	public void setDateToCheck(String dateToCheck) {
-		this.dateToCheck = dateToCheck;
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}	
-
+	
 }
