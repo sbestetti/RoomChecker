@@ -21,9 +21,6 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.inject.Named;
-
-@Named
 public class GoogleAPI {
 
 	/** Application name. */
@@ -75,8 +72,7 @@ public class GoogleAPI {
 		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY,
 				clientSecrets, SCOPES).setDataStoreFactory(DATA_STORE_FACTORY).setAccessType("offline").build();
 		Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
-		// System.out.println("Credentials saved to " +
-		// DATA_STORE_DIR.getAbsolutePath());
+		System.out.println("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
 		return credential;
 	}
 
@@ -87,112 +83,50 @@ public class GoogleAPI {
 	 * @throws IOException
 	 */
 	public static com.google.api.services.calendar.Calendar getCalendarService() throws IOException {
-		Credential credential = authorize();
+		Credential credential = GoogleCredentialGenerator.getCredential();
 		return new com.google.api.services.calendar.Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
 				.setApplicationName(APPLICATION_NAME).build();
 	}
 
-	public static List<Event> getItems(String roomToCheck, String dateToCheck) throws IOException {
-		
-		String room = new String();
-		
-		switch (roomToCheck) {
-			case "brittas":
-				room = "distilled.ie_2d3535343537353130@resource.calendar.google.com";
-				break;
-			case "bull":
-				room = "distilled.ie_2d3235333336363236323437@resource.calendar.google.com";
-				break;
-			case "cape":
-				room = "distilled.ie_3735313434313434393930@resource.calendar.google.com";
-				break;
-			case "carl":
-				room = "distilled.ie_2d3137303831303732353833@resource.calendar.google.com";
-				break;
-			case "conn":
-				room = "distilled.ie_2d34313939353135373333@resource.calendar.google.com";
-				break;
-			case "dingle":
-				room = "distilled.ie_2d38313039363136373834@resource.calendar.google.com";
-				break;
-			case "doolin":
-				room = "distilled.ie_2d3236303330373037373238@resource.calendar.google.com";
-				break;
-			case "glen":
-				room = "distilled.ie_2d3537353832373730393238@resource.calendar.google.com";
-				break;
-			case "kill":
-				room = "distilled.ie_3736333330393738393731@resource.calendar.google.com";
-				break;
-			case "lach":
-				room = "distilled.ie_2d3338363732303138323431@resource.calendar.google.com";
-				break;
-			case "new":
-				room = "distilled.ie_2d3238313131333331313136@resource.calendar.google.com";
-				break;
-			case "liber":
-				room = "distilled.ie_2d38353734373831393931@resource.calendar.google.com";
-				break;
-			case "tramore":
-				room = "distilled.ie_2d32333231393139323538@resource.calendar.google.com";
-				break;
-			case "after":
-				room = "distilled.ie_2d34343636383630322d353334@resource.calendar.google.com";
-				break;
-			case "bdeal":
-				room = "distilled.ie_31343531333235322d323639@resource.calendar.google.com";
-				break;
-			case "bideas":
-				room = "distilled.ie_2d3632383532303635323233@resource.calendar.google.com";
-				break;
-			case "camper":
-				room = "distilled.ie_33373739373036312d363134@resource.calendar.google.com";
-				break;
-			case "cow":
-				room = "distilled.ie_3939353638373235313733@resource.calendar.google.com";
-				break;
-			case "disco":
-				room = "distilled.ie_2d35353133363731353836@resource.calendar.google.com";
-				break;
-			case "little":
-				room = "distilled.ie_36363933303438392d373733@resource.calendar.google.com";
-				break;
-			case "ndeal":
-				room = "distilled.ie_33383033313634363934@resource.calendar.google.com";
-				break;
-			default:
-				room = null;
-				break;
-		}
-		// String response = new String();
-
+	public static List<Event> getEvents() {
 		// Build a new authorized API client service.
 		// Note: Do not confuse this class with the
 		// com.google.api.services.calendar.model.Calendar class.
-		com.google.api.services.calendar.Calendar service = getCalendarService();
+		com.google.api.services.calendar.Calendar service;
+		
 
 		// List the next 10 events from the primary calendar.
-		// DateTime now = new DateTime(System.currentTimeMillis());
-		// DateTime start = new DateTime(dateToCheck + "T00:00:00Z");
-		// DateTime end = new DateTime(dateToCheck + "T23:59:59Z");
-		Events events = service.events().list(room).setMaxResults(10)
-				.setTimeMin(new DateTime(dateToCheck + "T00:00:00Z"))
-				.setTimeMax(new DateTime(dateToCheck + "T23:59:59Z")).setOrderBy("startTime").setSingleEvents(true)
-				.execute();
-		return events.getItems();
-		// if (items.size() == 0) {
-		// response = "No upcoming events found.";
-		// } else {
-		// for (Event event : items) {
-		// DateTime start = event.getStart().getDateTime();
-		// if (start == null) {
-		// start = event.getStart().getDate();
-		// }
-		// response += "<br>" + event.getSummary() + "</br>";
-		// //System.out.printf("%s (%s)\n", event.getSummary(), start);
-		// }
-		// }
-		// return response;
+		DateTime now = new DateTime(System.currentTimeMillis());
+		Events events;
+		try {
+			service = getCalendarService();
+			events = service
+					.events()
+					.list("primary")
+					.setMaxResults(10)
+					.setTimeMin(now)
+					.setOrderBy("startTime")
+					.setSingleEvents(true)
+					.execute();
+			List<Event> items = events.getItems();
+			if (items.size() == 0) {
+				System.out.println("No upcoming events found.");
+			} else {
+				System.out.println("Upcoming events");
+				for (Event event : items) {
+					DateTime start = event.getStart().getDateTime();
+					if (start == null) {
+						start = event.getStart().getDate();
+					}
+					System.out.printf("%s (%s)\n", event.getSummary(), start);
+				}
+			}
+			return items;
+		} catch (IOException e) {
+			System.out.println("From event list generator:\n" + e.getLocalizedMessage());
+		}
+		
+		return null;
 	}
 
 }
