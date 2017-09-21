@@ -88,7 +88,7 @@ public class GoogleAPI {
 				.setApplicationName(APPLICATION_NAME).build();
 	}
 
-	public static List<Event> getEvents() {
+	public static List<Event> getEvents(String room, String dateToCheck) {
 		// Build a new authorized API client service.
 		// Note: Do not confuse this class with the
 		// com.google.api.services.calendar.model.Calendar class.
@@ -96,31 +96,13 @@ public class GoogleAPI {
 		
 
 		// List the next 10 events from the primary calendar.
-		DateTime now = new DateTime(System.currentTimeMillis());
-		Events events;
 		try {
 			service = getCalendarService();
-			events = service
-					.events()
-					.list("primary")
-					.setMaxResults(10)
-					.setTimeMin(now)
-					.setOrderBy("startTime")
-					.setSingleEvents(true)
+			Events events = service.events().list(room).setMaxResults(10)
+					.setTimeMin(new DateTime(dateToCheck + "T00:00:00Z"))
+					.setTimeMax(new DateTime(dateToCheck + "T23:59:59Z")).setOrderBy("startTime").setSingleEvents(true)
 					.execute();
 			List<Event> items = events.getItems();
-			if (items.size() == 0) {
-				System.out.println("No upcoming events found.");
-			} else {
-				System.out.println("Upcoming events");
-				for (Event event : items) {
-					DateTime start = event.getStart().getDateTime();
-					if (start == null) {
-						start = event.getStart().getDate();
-					}
-					System.out.printf("%s (%s)\n", event.getSummary(), start);
-				}
-			}
 			return items;
 		} catch (IOException e) {
 			System.out.println("From event list generator:\n" + e.getLocalizedMessage());
