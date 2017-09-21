@@ -7,12 +7,11 @@
 	<title>Room Checker</title>
 </h:head>
 <h:body>
-	<h1>Room Checker 1.0.0 - Response</h1>
+	<h1>Scheduled events for #{eventsBean.roomNameBeautiful}</h1>
 	<h:form>
 		<h:dataTable value="#{eventsBean.events}" var="event">
 			<h:column>
-				From <h:outputText value="#{event.organizer}" /> 
-				at <h:outputLabel value="#{event.start}"/>				
+				<h:outputText value="#{event}" converter="EventConverter" />
 			</h:column>
 		</h:dataTable>
 		<br />

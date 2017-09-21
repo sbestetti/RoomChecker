@@ -18,10 +18,13 @@ public class EventsBean{
 	@Inject
 	IndexBean indexBean;
 	private List<Event> events = new ArrayList<>();
+	private String roomNameBeautiful = new String();
 	
 	@PostConstruct
 	private void getDataFromIndexBean() {
-		String resourceName = RoomNameManager.getResourceName(indexBean.getRoomToCheck());
+		String roomToCheck = indexBean.getRoomToCheck();
+		roomNameBeautiful = RoomNameManager.getResourceName(roomToCheck, false);
+		String resourceName = RoomNameManager.getResourceName(roomToCheck, true);
 		setEvents(GoogleAPI.getEvents(resourceName, indexBean.getDateToCheck()));
 	}
 
@@ -32,6 +35,14 @@ public class EventsBean{
 
 	public void setEvents(List<Event> events) {
 		this.events = events;
+	}
+
+	public String getRoomNameBeautiful() {
+		return roomNameBeautiful;
+	}
+
+	public void setRoomNameBeautiful(String roomNameBeautiful) {
+		this.roomNameBeautiful = roomNameBeautiful;
 	}	
 	
 }

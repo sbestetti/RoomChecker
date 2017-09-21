@@ -93,7 +93,6 @@ public class GoogleAPI {
 		// Note: Do not confuse this class with the
 		// com.google.api.services.calendar.model.Calendar class.
 		com.google.api.services.calendar.Calendar service;
-		
 
 		// List the next 10 events from the primary calendar.
 		try {
@@ -107,7 +106,7 @@ public class GoogleAPI {
 		} catch (IOException e) {
 			System.out.println("From event list generator:\n" + e.getLocalizedMessage());
 		}
-		
+
 		return null;
 	}
 
