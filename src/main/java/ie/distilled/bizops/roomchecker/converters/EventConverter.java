@@ -1,11 +1,14 @@
 package ie.distilled.bizops.roomchecker.converters;
 
+import java.util.List;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventAttendee;
 
 @FacesConverter("EventConverter")
 public class EventConverter implements Converter {
@@ -17,7 +20,7 @@ public class EventConverter implements Converter {
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object object) {
-		
+		Boolean declinedFlag = false;
 		Event event = (Event) object;
 		String response = new String();
 		String start = event.getStart().getDateTime().toStringRfc3339().substring(11, 16);
@@ -27,6 +30,17 @@ public class EventConverter implements Converter {
 					+ event.getOrganizer().getDisplayName() + " (" + event.getOrganizer().getEmail() + ") "; 
 		} else {
 			response = "From " + start + " to " + end + " scheduled by "  + event.getOrganizer().getEmail();
+		}
+		
+		List<EventAttendee> attendees = event.getAttendees();
+		for (EventAttendee at : attendees) {
+			if(at.getResponseStatus().equals("declined") && at.isResource()) {
+				declinedFlag = true;
+			}
+		}
+		
+		if (declinedFlag) {
+			response = response + ", but declined by the room.";
 		}
 		
 		return response;

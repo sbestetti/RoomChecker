@@ -47,7 +47,8 @@ public class GoogleAPI {
 			service = getCalendarService();
 			Events events = service.events().list(room).setMaxResults(10)
 					.setTimeMin(new DateTime(dateToCheck + "T00:00:00Z"))
-					.setTimeMax(new DateTime(dateToCheck + "T23:59:59Z")).setOrderBy("startTime").setSingleEvents(true)
+					.setTimeMax(new DateTime(dateToCheck + "T23:59:59Z"))
+					.setOrderBy("startTime").setSingleEvents(true)
 					.execute();
 			List<Event> items = events.getItems();
 			return items;
