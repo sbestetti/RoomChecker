@@ -1,21 +1,23 @@
 package ie.distilled.bizops.roomchecker.beans;
 
-import java.io.Serializable;
-
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.inject.Named;
 
 @Named
-@SessionScoped
-public class IndexBean implements Serializable{
-	
-	private static final long serialVersionUID = 3185526729050141711L;
+@RequestScoped
+//TODO: Remove Serializable
+public class IndexBean{
 	
 	private String roomToCheck = new String();
 	private String dateToCheck = new String();	
 	
 	//Methods
 	public String check() {
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.put("room", roomToCheck);
+		flash.put("date", dateToCheck);
 		return "events?faces-redirect=true";
 	}
 
