@@ -27,7 +27,7 @@ public class EventConverter implements Converter {
 		String end = event.getEnd().getDateTime().toStringRfc3339().substring(11, 16);
 		if (event.getOrganizer().getDisplayName() != null) {
 			response = "From " + start + " to " + end + " scheduled by " 
-					+ event.getOrganizer().getDisplayName() + " (" + event.getOrganizer().getEmail() + ") "; 
+					+ event.getOrganizer().getDisplayName() + " (" + event.getOrganizer().getEmail() + ")"; 
 		} else {
 			response = "From " + start + " to " + end + " scheduled by "  + event.getOrganizer().getEmail();
 		}
