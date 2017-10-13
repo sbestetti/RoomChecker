@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.inject.Named;
 
 import com.google.api.services.calendar.model.Event;
@@ -15,19 +16,22 @@ import ie.distilled.bizops.roomchecker.tools.RoomNameManager;
 @Named
 public class EventsBean{
 	
-	@Inject
-	IndexBean indexBean;
 	private List<Event> events = new ArrayList<>();
 	private String roomNameBeautiful = new String();
 	
 	@PostConstruct
 	private void getDataFromIndexBean() {
-		String roomToCheck = indexBean.getRoomToCheck();
-		roomNameBeautiful = RoomNameManager.getResourceName(roomToCheck, false);
-		String resourceName = RoomNameManager.getResourceName(roomToCheck, true);
-		setEvents(GoogleAPI.getEvents(resourceName, indexBean.getDateToCheck()));
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		if (flash != null) {
+			String room = (String) flash.get("room");
+			String date = (String) flash.get("date");
+			String roomToCheck = room;
+			roomNameBeautiful = RoomNameManager.getResourceName(roomToCheck, false);
+			String resourceName = RoomNameManager.getResourceName(roomToCheck, true);
+			setEvents(GoogleAPI.getEvents(resourceName, date));
+		}
 	}
-
+	
 	//Getters & Setters
 	public List<Event> getEvents() {
 		return events;
