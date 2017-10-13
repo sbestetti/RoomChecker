@@ -22,7 +22,7 @@
 	<h1>Room Checker 1.0.0</h1>
 	<h:form>
 		<h:outputLabel value="Pick your room" />
-		<h:selectOneListbox value="#{indexBean.roomToCheck}" required="true">
+		<h:selectOneListbox value="#{indexBean.roomToCheck}">
 			<f:selectItem itemValue="brittas" itemLabel="Brittas Bay" />
 			<f:selectItem itemValue="bull" itemLabel="Bull Island" />
 			<f:selectItem itemValue="cape" itemLabel="Cape Clear" />
@@ -50,6 +50,11 @@
 		<h:inputText styleClass="datepicker" value="#{indexBean.dateToCheck}"></h:inputText>
 		<br></br>
 		<h:commandButton value="Check" action="#{indexBean.check}" />
+		<br></br>
+		or
+		<br></br>
+		<h:commandButton value="Find me a free room now" action="#{indexBean.freeRooms}"/>
+		(comming soon)
 	</h:form>
 	<h:messages />
 </h:body>

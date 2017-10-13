@@ -16,7 +16,15 @@ public class IndexBean implements Serializable{
 	
 	//Methods
 	public String check() {
-		return "events?faces-redirect=true";
+		if(roomToCheck == null || dateToCheck.isEmpty()) {
+			return "index?faces-redirect=true";
+		} else {
+			return "events?faces-redirect=true";
+		}
+	}
+	
+	public String freeRooms() {
+		return "freerooms?faces-redirect=true";
 	}
 
 	//Getters & Setters
@@ -36,6 +44,4 @@ public class IndexBean implements Serializable{
 		this.dateToCheck = dateToCheck;
 	}	
 
-	
-	
 }
