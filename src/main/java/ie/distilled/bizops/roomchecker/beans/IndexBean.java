@@ -5,6 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.inject.Named;
 
+import ie.distilled.bizops.roomchecker.tools.RoomListReader;
+
 @Named
 @RequestScoped
 public class IndexBean{
@@ -14,6 +16,7 @@ public class IndexBean{
 	
 	//Methods
 	public String check() {
+		new RoomListReader().readFile();
 		if(roomToCheck == null || dateToCheck.isEmpty()) {
 			return "index?faces-redirect=true";
 		} else {
