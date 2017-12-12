@@ -5,7 +5,7 @@ public class Room {
 	private String name;
 	private String address;
 	private String location;
-	private Integer capacity;
+	private Long capacity;
 	
 	public String getName() {
 		return name;
@@ -25,11 +25,11 @@ public class Room {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public Integer getCapacity() {
+	public Long getCapacity() {
 		return capacity;
 	}
-	public void setCapacity(Integer capacity) {
-		this.capacity = capacity;
+	public void setCapacity(long l) {
+		this.capacity = l;
 	}	
 
 }

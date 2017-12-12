@@ -2,7 +2,8 @@
   "rooms": [
     {
       "name": "Brittas Bay",
-      "address": "distilled.ie_2d3535343537353130@resource.calendar.google.com"
+      "address": "distilled.ie_2d3535343537353130@resource.calendar.google.com",
+      "capacity": 10
     },
     {
       "name": "Bull Island",

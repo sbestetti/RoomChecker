@@ -20,10 +20,11 @@ public class IndexBean{
 	
 	private String roomToCheck = new String();
 	private String dateToCheck = new String();
+	private ArrayList<Room> rooms = new ArrayList<>();
+	private Room room = new Room();
 	
 	//Methods
 	public String check() {
-		ArrayList<Room> rooms = roomListReader.getRoomList();
 		for (Room room : rooms) {
 			System.out.println(room.getName() + ": " + room.getAddress());
 		}
@@ -56,6 +57,23 @@ public class IndexBean{
 
 	public void setDateToCheck(String dateToCheck) {
 		this.dateToCheck = dateToCheck;
+	}
+
+	public ArrayList<Room> getRooms() {
+		this.rooms = roomListReader.getRoomList();
+		return rooms;
+	}
+
+	public void setRooms(ArrayList<Room> rooms) {
+		this.rooms = rooms;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
 	}	
 
 }

@@ -14,15 +14,14 @@ import org.json.simple.parser.ParseException;
 import ie.distilled.bizops.roomchecker.models.Room;
 
 @ApplicationScoped
-public class RoomManager {
+public class RoomManager {	
 	
-	private JSONParser parser = new JSONParser();
 	private ArrayList<Room> rooms = new ArrayList<Room>();
 	
 	public RoomManager() {
 		try {
-			Object obj = parser.parse(new FileReader("src/main/resources/rooms.json"));
-			JSONObject jsonObj = (JSONObject) obj;
+			JSONObject jsonObj = (JSONObject) new JSONParser()
+					.parse(new FileReader("src/main/resources/rooms.json"));
 			JSONArray array = (JSONArray) jsonObj.get("rooms");
 			int counter = array.size();
 			for (int i = 0; i < counter; i++) {
@@ -30,6 +29,9 @@ public class RoomManager {
 				Room currentRoom = new Room();
 				currentRoom.setName(currentObj.get("name").toString());
 				currentRoom.setAddress((currentObj.get("address").toString()));
+				if (currentObj.containsKey("capacity")) {
+					currentRoom.setCapacity((long)currentObj.get("capacity"));
+				}
 				this.rooms.add(currentRoom);				
 			}
 		} catch (IOException | ParseException e) {
