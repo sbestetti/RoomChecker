@@ -29,16 +29,20 @@ public class RoomManager {
 				Room currentRoom = new Room();
 				currentRoom.setName(currentObj.get("name").toString());
 				currentRoom.setAddress((currentObj.get("address").toString()));
+				// TODO Clear those IFs?
 				if (currentObj.containsKey("capacity")) {
 					currentRoom.setCapacity((long)currentObj.get("capacity"));
+				}
+				if (currentObj.containsKey("location")) {
+					currentRoom.setLocation(currentObj.get("location").toString());
 				}
 				this.rooms.add(currentRoom);				
 			}
 		} catch (IOException | ParseException e) {
-			// TODO Auto-generated catch block
+			// TODO Separate errors and write error message
 			e.printStackTrace();
 		}
-	}
+	}	
 	
 	public ArrayList<Room> getRoomList() {
 		return this.rooms;

@@ -18,36 +18,47 @@ public class IndexBean{
 	@Inject
 	RoomManager roomListReader;
 	
-	private String roomToCheck = new String();
+	//private String roomToCheck = new String();
+	private Room roomToCheck = new Room();
 	private String dateToCheck = new String();
 	private ArrayList<Room> rooms = new ArrayList<>();
 	private Room room = new Room();
 	
 	//Methods
+	
 	public String check() {
-		for (Room room : rooms) {
-			System.out.println(room.getName() + ": " + room.getAddress());
-		}
-		if(roomToCheck == null || dateToCheck.isEmpty()) {
+		if(roomToCheck == null || dateToCheck.isEmpty()) {			
 			return "index?faces-redirect=true";
 		} else {
 			Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 			flash.put("room", roomToCheck);
 			flash.put("date", dateToCheck);
+			System.out.println(flash);
 			return "events?faces-redirect=true";
 		}
 	}
+	
+//	public String check() {
+//		if(roomToCheck == null || dateToCheck.isEmpty()) {
+//			return "index?faces-redirect=true";
+//		} else {
+//			Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+//			flash.put("room", roomToCheck);
+//			flash.put("date", dateToCheck);
+//			return "events?faces-redirect=true";
+//		}
+//	}
 	
 	public String freeRooms() {
 		return "freerooms?faces-redirect=true";
 	}
 
 	//Getters & Setters
-	public String getRoomToCheck() {
+	public Room getRoomToCheck() {
 		return roomToCheck;
 	}
 
-	public void setRoomToCheck(String roomToCheck) {
+	public void setRoomToCheck(Room roomToCheck) {
 		this.roomToCheck = roomToCheck;
 	}
 

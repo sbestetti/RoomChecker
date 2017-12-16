@@ -38,6 +38,7 @@
 				<configuration>
 					<properties>
 						<swarm.http.port>80</swarm.http.port>
+						<!-- <swarm.debug.port>81</swarm.debug.port> -->
 					</properties>
 				</configuration>
 				<executions>
