@@ -16,9 +16,9 @@ import ie.distilled.bizops.roomchecker.models.Room;
 @ApplicationScoped
 public class RoomManager {	
 	
-	private ArrayList<Room> rooms = new ArrayList<Room>();
+	private static ArrayList<Room> rooms = new ArrayList<Room>();
 	
-	public RoomManager() {
+	static {		
 		try {
 			JSONObject jsonObj = (JSONObject) new JSONParser()
 					.parse(new FileReader("src/main/resources/rooms.json"));
@@ -36,7 +36,7 @@ public class RoomManager {
 				if (currentObj.containsKey("location")) {
 					currentRoom.setLocation(currentObj.get("location").toString());
 				}
-				this.rooms.add(currentRoom);				
+				rooms.add(currentRoom);				
 			}
 		} catch (IOException | ParseException e) {
 			// TODO Separate errors and write error message
@@ -45,7 +45,7 @@ public class RoomManager {
 	}
 	
 	public Room getRoomByAddress(String address) {
-		for (Room room : this.getRoomList()) {
+		for (Room room : RoomManager.getRoomList()) {
 			if (room.getAddress().equals(address)) {
 				return room;
 			}
@@ -53,8 +53,8 @@ public class RoomManager {
 		return null;
 	}
 	
-	public ArrayList<Room> getRoomList() {
-		return this.rooms;
+	public static ArrayList<Room> getRoomList() {
+		return rooms;
 	}	
 
 }

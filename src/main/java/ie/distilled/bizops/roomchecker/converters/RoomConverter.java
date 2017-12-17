@@ -15,7 +15,8 @@ public class RoomConverter implements Converter{
 	
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		ArrayList<Room> rooms = new RoomManager().getRoomList();
+		new RoomManager();
+		ArrayList<Room> rooms = RoomManager.getRoomList();
 		for (Room room : rooms) {
 			if (room.getAddress().equals(arg2)) {
 				return room;

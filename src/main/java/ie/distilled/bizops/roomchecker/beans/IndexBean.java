@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import ie.distilled.bizops.roomchecker.models.Room;
@@ -13,10 +12,7 @@ import ie.distilled.bizops.roomchecker.tools.RoomManager;
 
 @Named
 @RequestScoped
-public class IndexBean{
-	
-	@Inject
-	RoomManager roomManager;
+public class IndexBean{	
 	
 	private String roomToCheck = new String();
 	private String dateToCheck = new String();
@@ -46,7 +42,6 @@ public class IndexBean{
 	}
 
 	public void setRoomToCheck(String roomToCheck) {
-		System.out.println("setRoom: " + roomToCheck);
 		this.roomToCheck = roomToCheck;
 	}
 
@@ -59,7 +54,7 @@ public class IndexBean{
 	}
 
 	public ArrayList<Room> getRooms() {
-		this.rooms = roomManager.getRoomList();
+		this.rooms = RoomManager.getRoomList();		
 		return rooms;
 	}
 
