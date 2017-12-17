@@ -22,8 +22,8 @@
 	<h1>Room Checker 1.0.0</h1>
 	<h:form>
 		<h:outputLabel value="Pick your room" />
-		<h:selectOneListbox value="#{indexBean.roomToCheck}" converter="RoomConverter">
-			<f:selectItems value="#{indexBean.rooms}" var="room" itemValue="#{room.address}" itemLabel="#{room.name} (#{room.capacity})" />			
+		<h:selectOneListbox value="#{indexBean.roomToCheck}">
+			<f:selectItems value="#{indexBean.rooms}" var="room" itemValue="#{room.address}" itemLabel="#{room.location} -  #{room.name} (#{room.capacity})" />			
 		</h:selectOneListbox>
 		<br></br>
 		<h:outputLabel value="Date (yyyy-mm-dd)" />

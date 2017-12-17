@@ -42,7 +42,16 @@ public class RoomManager {
 			// TODO Separate errors and write error message
 			e.printStackTrace();
 		}
-	}	
+	}
+	
+	public Room getRoomByAddress(String address) {
+		for (Room room : this.getRoomList()) {
+			if (room.getAddress().equals(address)) {
+				return room;
+			}
+		}
+		return null;
+	}
 	
 	public ArrayList<Room> getRoomList() {
 		return this.rooms;

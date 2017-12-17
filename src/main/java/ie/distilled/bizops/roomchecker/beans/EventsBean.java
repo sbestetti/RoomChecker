@@ -6,15 +6,20 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.google.api.services.calendar.model.Event;
 
 import ie.distilled.bizops.roomchecker.models.Room;
 import ie.distilled.bizops.roomchecker.tools.GoogleAPI;
+import ie.distilled.bizops.roomchecker.tools.RoomManager;
 
 @Named
 public class EventsBean{
+	
+	@Inject
+	RoomManager roomManager;
 	
 	private List<Event> events = new ArrayList<>();
 	private String roomNameBeautiful = new String();
@@ -34,16 +39,12 @@ public class EventsBean{
 	
 	@PostConstruct
 	private void getDataFromIndexBean() {
-		// TODO Clear messages
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		if (flash != null) {
-			System.out.println(flash.get("room"));
-			Room room = (Room) flash.get("room");
+			Room room = roomManager.getRoomByAddress((String) flash.get("room"));
 			String date = (String) flash.get("date");
 			this.roomNameBeautiful = room.getName();
 			this.setEvents(GoogleAPI.getEvents(room.getAddress(), date));
-		} else {
-			System.out.println("Flash context empty");
 		}
 	}
 	

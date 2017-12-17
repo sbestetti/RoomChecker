@@ -15,7 +15,6 @@ public class RoomConverter implements Converter{
 	
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		System.out.println("Converter called room: " + arg2);
 		ArrayList<Room> rooms = new RoomManager().getRoomList();
 		for (Room room : rooms) {
 			if (room.getAddress().equals(arg2)) {
@@ -27,9 +26,7 @@ public class RoomConverter implements Converter{
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
-		String response = new String();
-		response = "Test";
-		return response;
+		return null;
 	}
 
 }
