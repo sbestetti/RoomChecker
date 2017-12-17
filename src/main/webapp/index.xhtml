@@ -23,26 +23,7 @@
 	<h:form>
 		<h:outputLabel value="Pick your room" />
 		<h:selectOneListbox value="#{indexBean.roomToCheck}">
-			<f:selectItem itemValue="brittas" itemLabel="Brittas Bay" />
-			<f:selectItem itemValue="cape" itemLabel="Cape Clear" />
-			<f:selectItem itemValue="carl" itemLabel="Carlingford" />
-			<f:selectItem itemValue="conn" itemLabel="Connemara" />
-			<f:selectItem itemValue="dingle" itemLabel="Dingle" />
-			<f:selectItem itemValue="doolin" itemLabel="Doolin" />
-			<f:selectItem itemValue="glen" itemLabel="Glendalough" />
-			<f:selectItem itemValue="kill" itemLabel="Killiney Hill" />
-			<f:selectItem itemValue="lach" itemLabel="Lachinch" />
-			<f:selectItem itemValue="new" itemLabel="Newgrange" />
-			<f:selectItem itemValue="liber" itemLabel="The Liberties" />
-			<f:selectItem itemValue="tramore" itemLabel="Tramore" />
-			<f:selectItem itemValue="after" itemLabel="WEX - After thoughts" />
-			<f:selectItem itemValue="bdeal" itemLabel="WEX - Big Deal" />
-			<f:selectItem itemValue="bideas" itemLabel="WEX - Big Ideas" />
-			<f:selectItem itemValue="camper" itemLabel="WEX - Camper Van" />
-			<f:selectItem itemValue="cow" itemLabel="WEX - Cow Shed" />
-			<f:selectItem itemValue="disco" itemLabel="WEX - Disco Cave" />
-			<f:selectItem itemValue="little" itemLabel="WEX - Little Deal" />
-			<f:selectItem itemValue="ndeal" itemLabel="WEX - No Deal" />
+			<f:selectItems value="#{indexBean.rooms}" var="room" itemValue="#{room.address}" itemLabel="#{room.location} -  #{room.name} (#{room.capacity})" />			
 		</h:selectOneListbox>
 		<br></br>
 		<h:outputLabel value="Date (yyyy-mm-dd)" />

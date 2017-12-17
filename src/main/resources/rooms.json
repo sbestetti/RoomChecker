@@ -2,7 +2,9 @@
   "rooms": [
     {
       "name": "Brittas Bay",
-      "address": "distilled.ie_2d3535343537353130@resource.calendar.google.com"
+      "address": "distilled.ie_2d3535343537353130@resource.calendar.google.com",
+      "capacity": 3,
+      "location": "3rd floor"
     },
     {
       "name": "Bull Island",
@@ -10,35 +12,51 @@
     },
     {
       "name": "Cape Clear",
-      "address": "distilled.ie_3735313434313434393930@resource.calendar.google.com"
+      "address": "distilled.ie_3735313434313434393930@resource.calendar.google.com",
+      "capacity": 5,
+      "location": "2nd floor"
     },
     {
       "name": "Carlingford",
-      "address": "distilled.ie_2d3137303831303732353833@resource.calendar.google.com"
+      "address": "distilled.ie_2d3137303831303732353833@resource.calendar.google.com",
+      "capacity": 8,
+      "location": "3rd floor"
     },
     {
       "name": "Connemara",
-      "address": "distilled.ie_2d34313939353135373333@resource.calendar.google.com"
+      "address": "distilled.ie_2d34313939353135373333@resource.calendar.google.com",
+      "capacity": 12,
+      "location": "2nd floor"
     },
     {
       "name": "Dingle",
-      "address": "distilled.ie_2d38313039363136373834@resource.calendar.google.com"
+      "address": "distilled.ie_2d38313039363136373834@resource.calendar.google.com",
+      "capacity": 6,
+      "location": "2nd floor"
     },
     {
       "name": "Doolin",
-      "address": "distilled.ie_2d3236303330373037373238@resource.calendar.google.com"
+      "address": "distilled.ie_2d3236303330373037373238@resource.calendar.google.com",
+      "capacity": 6,
+      "location": "2nd floor"
     },
     {
       "name": "Glenndalough",
-      "address": "distilled.ie_2d3537353832373730393238@resource.calendar.google.com"
+      "address": "distilled.ie_2d3537353832373730393238@resource.calendar.google.com",
+      "capacity": 8,
+      "location": "3rd floor"
     },
     {
       "name": "Killiney Hill",
-      "address": "distilled.ie_3736333330393738393731@resource.calendar.google.com"
+      "address": "distilled.ie_3736333330393738393731@resource.calendar.google.com",
+      "capacity": 4,
+      "location": "3rd floor"
     },
     {
       "name": "Lachinch",
-      "address": "distilled.ie_2d3338363732303138323431@resource.calendar.google.com"
+      "address": "distilled.ie_2d3338363732303138323431@resource.calendar.google.com",
+      "capacity": 8,
+      "location": "2nd floor"
     },
     {
       "name": "Newgrange",

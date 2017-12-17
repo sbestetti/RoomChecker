@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import ie.distilled.bizops.roomchecker.models.Room;
@@ -13,21 +12,17 @@ import ie.distilled.bizops.roomchecker.tools.RoomManager;
 
 @Named
 @RequestScoped
-public class IndexBean{
-	
-	@Inject
-	RoomManager roomListReader;
+public class IndexBean{	
 	
 	private String roomToCheck = new String();
 	private String dateToCheck = new String();
+	private ArrayList<Room> rooms = new ArrayList<>();
+	private Room room = new Room();
 	
 	//Methods
+	
 	public String check() {
-		ArrayList<Room> rooms = roomListReader.getRoomList();
-		for (Room room : rooms) {
-			System.out.println(room.getName() + ": " + room.getAddress());
-		}
-		if(roomToCheck == null || dateToCheck.isEmpty()) {
+		if(roomToCheck == null || dateToCheck.isEmpty()) {			
 			return "index?faces-redirect=true";
 		} else {
 			Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
@@ -56,6 +51,23 @@ public class IndexBean{
 
 	public void setDateToCheck(String dateToCheck) {
 		this.dateToCheck = dateToCheck;
+	}
+
+	public ArrayList<Room> getRooms() {
+		this.rooms = RoomManager.getRoomList();		
+		return rooms;
+	}
+
+	public void setRooms(ArrayList<Room> rooms) {
+		this.rooms = rooms;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
 	}	
 
 }
