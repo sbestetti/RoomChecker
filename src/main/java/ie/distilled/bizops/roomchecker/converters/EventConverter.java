@@ -10,6 +10,9 @@ import javax.faces.convert.FacesConverter;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
 
+import ie.distilled.bizops.roomchecker.models.Room;
+import ie.distilled.bizops.roomchecker.tools.RoomManager;
+
 @FacesConverter("EventConverter")
 public class EventConverter implements Converter {
 
@@ -25,6 +28,7 @@ public class EventConverter implements Converter {
 		String response = new String();
 		String start = event.getStart().getDateTime().toStringRfc3339().substring(11, 16);
 		String end = event.getEnd().getDateTime().toStringRfc3339().substring(11, 16);
+		Room room = new Room();
 		if (event.getOrganizer().getDisplayName() != null) {
 			response = "From " + start + " to " + end + " scheduled by " 
 					+ event.getOrganizer().getDisplayName() + " (" + event.getOrganizer().getEmail() + ")"; 
@@ -33,9 +37,12 @@ public class EventConverter implements Converter {
 		}
 		
 		List<EventAttendee> attendees = event.getAttendees();
-		for (EventAttendee at : attendees) {
+		for (EventAttendee at : attendees) {			
 			if(at.getResponseStatus().equals("declined") && at.isResource()) {
 				declinedFlag = true;
+			}
+			if (at.isResource()) {
+				room = RoomManager.getRoomByAddress(at.getEmail());				
 			}
 		}
 		
@@ -43,7 +50,7 @@ public class EventConverter implements Converter {
 			response = response + ", but declined by the room.";
 		}
 		
-		return response;
+		return room.getName() + " - " + response;
 		
 	}
 

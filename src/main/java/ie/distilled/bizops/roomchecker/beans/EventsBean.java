@@ -1,9 +1,11 @@
 package ie.distilled.bizops.roomchecker.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ConversationScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.inject.Inject;
@@ -11,18 +13,22 @@ import javax.inject.Named;
 
 import com.google.api.services.calendar.model.Event;
 
-import ie.distilled.bizops.roomchecker.models.Room;
 import ie.distilled.bizops.roomchecker.tools.GoogleAPI;
 import ie.distilled.bizops.roomchecker.tools.RoomManager;
 
 @Named
-public class EventsBean{
+@ConversationScoped
+public class EventsBean implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8673816951488187213L;
+
 	@Inject
 	RoomManager roomManager;
 	
-	private List<Event> events = new ArrayList<>();
-	private String roomNameBeautiful = new String();
+	private List<Event> events = new ArrayList<>();	
 	
 //	@PostConstruct
 //	private void getDataFromIndexBean() {
@@ -37,14 +43,18 @@ public class EventsBean{
 //		}
 //	}
 	
+	@SuppressWarnings("unchecked")
 	@PostConstruct
 	private void getDataFromIndexBean() {
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		if (flash != null) {
-			Room room = roomManager.getRoomByAddress((String) flash.get("room"));
+			ArrayList<String> rooms = (ArrayList<String>) flash.get("rooms");
+			ArrayList<Event> events = new ArrayList<>();
 			String date = (String) flash.get("date");
-			this.roomNameBeautiful = room.getName();
-			this.setEvents(GoogleAPI.getEvents(room.getAddress(), date));
+			for (String room : rooms) {
+				events.addAll(GoogleAPI.getEvents(room, date));
+			}			
+			this.setEvents(events);
 		}
 	}
 	
@@ -55,14 +65,6 @@ public class EventsBean{
 
 	public void setEvents(List<Event> events) {
 		this.events = events;
-	}
-
-	public String getRoomNameBeautiful() {
-		return roomNameBeautiful;
-	}
-
-	public void setRoomNameBeautiful(String roomNameBeautiful) {
-		this.roomNameBeautiful = roomNameBeautiful;
 	}	
 	
 }

@@ -22,9 +22,9 @@
 	<h1>Room Checker 1.0.0</h1>
 	<h:form>
 		<h:outputLabel value="Pick your room" />
-		<h:selectOneListbox value="#{indexBean.roomToCheck}">
+		<h:selectManyListbox value="#{indexBean.roomsToCheck}">
 			<f:selectItems value="#{indexBean.rooms}" var="room" itemValue="#{room.address}" itemLabel="#{room.location} -  #{room.name} (#{room.capacity})" />			
-		</h:selectOneListbox>
+		</h:selectManyListbox>
 		<br></br>
 		<h:outputLabel value="Date (yyyy-mm-dd)" />
 		<h:inputText styleClass="datepicker" value="#{indexBean.dateToCheck}"></h:inputText>

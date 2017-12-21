@@ -7,10 +7,6 @@
       "location": "3rd floor"
     },
     {
-      "name": "Bull Island",
-      "address": "distilled.ie_2d3235333336363236323437@resource.calendar.google.com"
-    },
-    {
       "name": "Cape Clear",
       "address": "distilled.ie_3735313434313434393930@resource.calendar.google.com",
       "capacity": 5,
@@ -60,47 +56,69 @@
     },
     {
       "name": "Newgrange",
-      "address": "distilled.ie_2d3238313131333331313136@resource.calendar.google.com"
+      "address": "distilled.ie_2d3238313131333331313136@resource.calendar.google.com",
+      "capacity": 3,
+      "location": "3rd floor"
     },
     {
       "name": "The Liberties",
-      "address": "distilled.ie_2d38353734373831393931@resource.calendar.google.com"
+      "address": "distilled.ie_2d38353734373831393931@resource.calendar.google.com",
+      "capacity": 4,
+      "location": "3rd floor"
     },
     {
       "name": "Tramore",
-      "address": "distilled.ie_2d32333231393139323538@resource.calendar.google.com"
+      "address": "distilled.ie_2d32333231393139323538@resource.calendar.google.com",
+      "capacity": 3,
+      "location": "3rd floor"
     },
     {
       "name": "After toughts",
-      "address": "distilled.ie_2d34343636383630322d353334@resource.calendar.google.com"
+      "address": "distilled.ie_2d34343636383630322d353334@resource.calendar.google.com",
+      "capacity": 0,
+      "location": "Wexford - Right"
     },
     {
       "name": "Big Deal",
-      "address": "distilled.ie_31343531333235322d323639@resource.calendar.google.com"
+      "address": "distilled.ie_31343531333235322d323639@resource.calendar.google.com",
+      "capacity": 0,
+      "location": "Wexford - Board room"
     },
     {
       "name": "Big Ideas",
-      "address": "distilled.ie_2d3632383532303635323233@resource.calendar.google.com"
+      "address": "distilled.ie_2d3632383532303635323233@resource.calendar.google.com",
+      "capacity": 0,
+      "location": "Wexford - Middle"
     },
     {
       "name": "Camper Van",
-      "address": "distilled.ie_33373739373036312d363134@resource.calendar.google.com"
-    },
-    {
-      "name": "Cow Shed",
-      "address": "distilled.ie_3939353638373235313733@resource.calendar.google.com"
-    },
+      "address": "distilled.ie_33373739373036312d363134@resource.calendar.google.com",
+      "capacity": 0,
+      "location": "Wexford"
+    },    
     {
       "name": "Disco Cave",
-      "address": "distilled.ie_2d35353133363731353836@resource.calendar.google.com"
+      "address": "distilled.ie_2d35353133363731353836@resource.calendar.google.com",
+      "capacity": 0,
+      "location": "Wexford"
     },
     {
       "name": "Little Deal",
-      "address": "distilled.ie_36363933303438392d373733@resource.calendar.google.com"
+      "address": "distilled.ie_36363933303438392d373733@resource.calendar.google.com",
+      "capacity": 0,
+      "location": "Wexford - Left"
     },
     {
       "name": "No Deal",
-      "address": "distilled.ie_33383033313634363934@resource.calendar.google.com"
+      "address": "distilled.ie_33383033313634363934@resource.calendar.google.com",
+      "capacity": 0,
+      "location": "Wexford"
+    },
+    {
+      "name": "The Library",
+      "address": "distilled.ie_3635373334393233373736@resource.calendar.google.com",
+      "capacity": 0,
+      "location": "Wexford"
     }
   ]
 }

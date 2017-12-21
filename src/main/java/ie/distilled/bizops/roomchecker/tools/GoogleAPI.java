@@ -43,7 +43,7 @@ public class GoogleAPI {
 		// Note: Do not confuse this class with the
 		// com.google.api.services.calendar.model.Calendar class.
 		com.google.api.services.calendar.Calendar service;
-		try {
+		try {			
 			service = getCalendarService();
 			Events events = service.events().list(room).setMaxResults(10)
 					.setTimeMin(new DateTime(dateToCheck + "T00:00:00Z"))

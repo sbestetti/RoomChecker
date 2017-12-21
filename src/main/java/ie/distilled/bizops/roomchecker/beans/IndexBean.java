@@ -14,7 +14,7 @@ import ie.distilled.bizops.roomchecker.tools.RoomManager;
 @RequestScoped
 public class IndexBean{	
 	
-	private String roomToCheck = new String();
+	private ArrayList<String> roomsToCheck = new ArrayList<String>();
 	private String dateToCheck = new String();
 	private ArrayList<Room> rooms = new ArrayList<>();
 	private Room room = new Room();
@@ -22,11 +22,11 @@ public class IndexBean{
 	//Methods
 	
 	public String check() {
-		if(roomToCheck == null || dateToCheck.isEmpty()) {			
+		if(roomsToCheck == null || dateToCheck.isEmpty()) {			
 			return "index?faces-redirect=true";
-		} else {
+		} else {			
 			Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-			flash.put("room", roomToCheck);
+			flash.put("rooms", roomsToCheck);
 			flash.put("date", dateToCheck);
 			return "events?faces-redirect=true";
 		}
@@ -37,12 +37,12 @@ public class IndexBean{
 	}
 
 	//Getters & Setters
-	public String getRoomToCheck() {
-		return roomToCheck;
+	public ArrayList<String> getRoomsToCheck() {
+		return roomsToCheck;
 	}
 
-	public void setRoomToCheck(String roomToCheck) {
-		this.roomToCheck = roomToCheck;
+	public void setRoomsToCheck(ArrayList<String> roomToCheck) {		
+		this.roomsToCheck = roomToCheck;
 	}
 
 	public String getDateToCheck() {

@@ -37,20 +37,22 @@ public class RoomManager {
 					currentRoom.setLocation(currentObj.get("location").toString());
 				}
 				rooms.add(currentRoom);				
-			}
+			}			
 		} catch (IOException | ParseException e) {
 			// TODO Separate errors and write error message
 			e.printStackTrace();
 		}
 	}
 	
-	public Room getRoomByAddress(String address) {
+	public static Room getRoomByAddress(String address) {
 		for (Room room : RoomManager.getRoomList()) {
 			if (room.getAddress().equals(address)) {
 				return room;
 			}
 		}
-		return null;
+		Room response = new Room();
+		response.setName("Null Room");
+		return response;
 	}
 	
 	public static ArrayList<Room> getRoomList() {
