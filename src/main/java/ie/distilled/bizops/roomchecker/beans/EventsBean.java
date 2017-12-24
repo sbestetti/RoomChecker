@@ -20,28 +20,12 @@ import ie.distilled.bizops.roomchecker.tools.RoomManager;
 @ConversationScoped
 public class EventsBean implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8673816951488187213L;
 
 	@Inject
 	RoomManager roomManager;
 	
 	private List<Event> events = new ArrayList<>();	
-	
-//	@PostConstruct
-//	private void getDataFromIndexBean() {
-//		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
-//		if (flash != null) {
-//			String room = (String) flash.get("room");
-//			String date = (String) flash.get("date");
-//			String roomToCheck = room;
-//			roomNameBeautiful = RoomNameManager.getResourceName(roomToCheck, false);
-//			String resourceName = RoomNameManager.getResourceName(roomToCheck, true);
-//			setEvents(GoogleAPI.getEvents(resourceName, date));
-//		}
-//	}
 	
 	@SuppressWarnings("unchecked")
 	@PostConstruct
